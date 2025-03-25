@@ -1,0 +1,47 @@
+<template>
+  <span
+    class="p-1 rounded-md text-sm text-center inline-flex items-center gap-1"
+    :class="badgeStyle"
+  >
+    <i class="icon-calendar text-base leading-4" />
+    {{ status }}
+  </span>
+</template>
+
+<script setup lang="ts">
+import { IColors } from "@/types/components/badge";
+import { computed } from "vue";
+
+interface Props {
+  status: string;
+  color: IColors;
+  size: "sm" | "md";
+  iconName?: string;
+}
+const props = withDefaults(defineProps<Props>(), {
+  color: "blueDark",
+  status: "Badge",
+  size: "md",
+});
+
+const badgeColor = computed(() => {
+  switch (props.color) {
+    case "blueDark":
+      return "bg-blueDark-400 text-blueDark-100";
+    case "red":
+      return " text-red";
+    case "yellow":
+      return " text-yellow-100";
+    case "blue":
+      return " text-blue";
+    case "gray":
+      return " text-blue-800";
+    default:
+      return "default";
+  }
+});
+
+const badgeStyle = computed(() => {
+  return `${props.size === "md" ? "p-2" : "p-1"} ${badgeColor.value}`;
+});
+</script>

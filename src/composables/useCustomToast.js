@@ -1,0 +1,17 @@
+import * as pkg from "vue-toastification";
+import CommonToast from "@/components/CToast.vue";
+const { useToast } = pkg;
+export const useCustomToast = () => {
+  const toast = useToast();
+  const showToast = (title, type) => {
+    toast({
+      component: CommonToast,
+      props: {
+        title,
+        type,
+      },
+    });
+  };
+  return { showToast };
+};
+//# sourceMappingURL=useCustomToast.js.map
